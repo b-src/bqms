@@ -1,3 +1,4 @@
+import os
 import sqlite3
 
 
@@ -18,7 +19,7 @@ def insert_document_record(document_name, dir_path) -> bool:
 
 def execute_parameterized_insert_statement(query: str, args: tuple) -> bool:
     conn = sqlite3.connect(DB_PATH)
-    cursor = db_connection.cursor()
+    cursor = conn.cursor()
     cursor.execute(query, args)
-    db_connection.commit()
+    conn.commit()
     conn.close()
