@@ -14,10 +14,10 @@ dir_path TEXT NOT NULL
 """
 
 
-def execute_sql_statement(db_connection: sqlite3.Connection, sql_statement: str) -> None:
+def execute_table_create_statement(db_connection: sqlite3.Connection, table_create_statement: str) -> None:
     cursor = db_connection.cursor()
 
-    cursor.execute(sql_statement)
+    cursor.execute(table_create_statement)
 
     db_connection.commit()
 
@@ -28,6 +28,6 @@ def initialize_database() -> None:
 
     conn = sqlite3.connect(DB_PATH)
     
-    execute_sql_statement(conn, CREATE_TABLE_DOCUMENTS)
+    execute_table_create_statement(conn, CREATE_TABLE_DOCUMENTS)
 
     conn.close()
