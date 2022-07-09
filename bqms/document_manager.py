@@ -29,4 +29,4 @@ class DocumentManager:
         )
 
         result = True
-        return result
+        return result and record_inserted_successfully

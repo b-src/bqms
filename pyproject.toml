@@ -1,0 +1,10 @@
+[tool.black]
+line-length = 90
+
+[tool.flakeheaven]
+max_line_length = 90
+format = "grouped"
+show_source = true
+# required to maintain compatibility with black
+extend_ignore = "E203"
+
