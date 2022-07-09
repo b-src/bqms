@@ -2,7 +2,7 @@ import os
 import sqlite3
 
 
-DB_PATH = os.getenv('BQMS_DB_PATH')
+DB_PATH = os.getenv("BQMS_DB_PATH")
 
 
 def insert_document_record(document_name, dir_path) -> bool:
@@ -13,7 +13,7 @@ def insert_document_record(document_name, dir_path) -> bool:
     args = (document_name, dir_path)
 
     result = execute_parameterized_insert_statement(query, args)
-    
+
     return result
 
 
