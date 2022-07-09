@@ -16,7 +16,7 @@ class GitHelper:
             os.chdir(dir_path)
             git_result = subprocess.run(["git", "init"], capture_output=True)
             # TODO: check output, handle errors, get actual result from git_result
-            result = True and git_result
+            result = True and bool(git_result)
 
         finally:
             os.chdir(original_working_dir)
