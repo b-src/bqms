@@ -31,6 +31,14 @@ class DocumentManager:
         result = True
         return result and record_inserted_successfully
 
+    def create_draft_revision(self, document_id: int, revision_name) -> bool:
+        result = False
+
+        document_dir = db_helper.get_document_dir_path_from_id(document_id)
+        result = self.git_helper.git_create_branch(dir_path)
+
+        return result
+
     def save_changes_to_document(
         self, document_source_path: str, document_dest_path: str
     ) -> bool:
@@ -53,3 +61,19 @@ class DocumentManager:
 
         # TODO: figure out what actually happened
         return True
+
+    def publish_changes_to_document(self, document_dir, revision_name, new_version):
+        checkout_successful = self.git_helper.git_check_out_existing_branch(
+            document_dir, "main"
+        )
+        merge_successful = self.git_helper.git_merge(document_dir, revision_name)
+
+        document_id = db_helper.get_document_id_from_dir_path(document_dir)
+
+        revision_id = db_helper.insert_revision_record(document_id, new_version)
+
+        document_revision_updated = db_helper.update_document_revision(
+            document_id, revision_id
+        )
+
+        result = checkout_successful and merge_successful and document_revision_updated

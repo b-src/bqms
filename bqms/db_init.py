@@ -8,8 +8,17 @@ DB_PATH = os.getenv("BQMS_DB_PATH")
 CREATE_TABLE_DOCUMENTS = """
 CREATE TABLE documents (
 id INTEGER PRIMARY KEY,
+current_revision_id INTEGER FOREIGN KEY,
 name TEXT NOT NULL,
 dir_path TEXT NOT NULL
+)
+"""
+
+CREATE_TABLE_REVISIONS = """
+CREATE TABLE revisions (
+id INTEGER PRIMARY KEY,
+document_id INTEGER FOREIGN KEY,
+version = TEXT NOT NULL
 )
 """
 
@@ -31,5 +40,6 @@ def initialize_database() -> None:
     conn = sqlite3.connect(DB_PATH)
 
     execute_table_create_statement(conn, CREATE_TABLE_DOCUMENTS)
+    execute_table_create_statement(conn, CREATE_TABLE_REVISIONS)
 
     conn.close()
