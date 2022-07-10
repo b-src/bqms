@@ -46,6 +46,26 @@ class GitHelper:
 
         return result
 
+    def git_create_branch(self, dir_path: str, branch_name: str) -> bool:
+        result = False
+
+        git_command_list = ["git", "checkout", "-b", branch_name]
+        git_result = self._run_git_command(dir_path, git_command_list)
+        # TODO: check output, handle errors, get actual result from git_result
+        result = True and bool(git_result)
+
+        return result
+
+    def git_check_out_existing_branch(self, dir_path: str, branch_name: str) -> bool:
+        result = False
+
+        git_command_list = ["git", "checkout", branch_name]
+        git_result = self._run_git_command(dir_path, git_command_list)
+        # TODO: check output, handle errors, get actual result from git_result
+        result = True and bool(git_result)
+
+        return result
+
     def get_working_dir_status(self, dir_path: str) -> WorkingDirStatus:
         git_status = self._git_status(dir_path)
 
