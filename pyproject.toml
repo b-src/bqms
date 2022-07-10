@@ -5,6 +5,14 @@ line-length = 90
 max_line_length = 90
 format = "grouped"
 show_source = true
-# required to maintain compatibility with black
-extend_ignore = "E203"
+
+[tool.flakeheaven.plugins]
+# E203 required to maintain compatibility with black
+# W503 is a linebreak before binary operators. flake8 also has W504, linebreak *after*
+# binary operators. PEP-8 recommends linebreaks before binary operators to keep all
+# operators aligned. this config respects W504 and ignores W503
+pycodestyle = [
+    "-E203",
+    "-W503",
+]
 
